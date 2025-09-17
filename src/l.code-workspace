@@ -1,0 +1,19 @@
+{
+  "folders": [
+	{
+		"path": "../../Desktop/css_and_html"
+	},
+	{
+		"path": "../../Desktop/c"
+	},
+	{
+		"path": "../../Desktop/payython"
+	},
+	{
+		"path": "../../Desktop/javascript"
+	}
+],
+  "settings": {
+    "liveServer.settings.multiRootWorkspaceName": "javascript"
+  }
+}
