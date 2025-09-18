@@ -1,1 +1,3 @@
-export const task = 0;
+export class Task {
+  constructor() {}
+}

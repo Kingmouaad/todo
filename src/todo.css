@@ -58,6 +58,9 @@ body {
   display: flex;
   width: 100%;
   height: 60%;
+  flex-direction: column;
+  align-items: center;
+  gap: 10px;
 }
 #thirddiv {
   display: none;
@@ -101,7 +104,7 @@ body {
   font-size: 21px;
 }
 /* css */
-#add {
+#mdd {
   border-radius: 5px;
   color: white;
   background-color: #3b82f6;
@@ -125,7 +128,7 @@ body {
   border: none;
 }
 #cancel:hover,
-#add:hover {
+#mdd:hover {
   transform: translateY(-5px);
 }
 #color {
@@ -264,4 +267,22 @@ option,
 .fourth {
   grid-area: fourth;
   background-color: #17202e;
+}
+.project {
+  width: 90%;
+  display: flex;
+  gap: 20px;
+  background-color: #1f2937;
+  cursor: pointer;
+  border-radius: 10px;
+}
+.project:active {
+  background-color: #374151;
+}
+#numberoftask {
+  width: 20px;
+  height: 20px;
+  border-radius: 50%;
+  color: white;
+  background-color: #4b5563;
 }
