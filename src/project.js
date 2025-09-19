@@ -10,6 +10,7 @@ export class project {
     const numberoftask = document.createElement("div");
     layout.classList.add("project");
     name.setAttribute("style", "color:white;font-size:22px;");
+    name.textContent = this.name;
     circle.setAttribute(
       "style",
       `background-color:${this.color};border-radius:50%;width:20px;height:20px;`
