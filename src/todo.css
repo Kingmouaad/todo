@@ -276,6 +276,12 @@ option,
   cursor: pointer;
   border-radius: 10px;
   align-items: center;
+  cursor: pointer;
+  transition: all 0.3s ease;
+}
+.project:hover {
+  transform: translateY(-4px);
+  background-color: #374151;
 }
 .project:active {
   background-color: #374151;
