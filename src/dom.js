@@ -58,3 +58,33 @@ addproject.addEventListener("click", (e) => {
 cancelproject.addEventListener("click", () => {
   formcontainer.style.display = "none";
 });
+
+// task part
+
+const allproject = Array.from(document.querySelector("#seconddiv").children);
+const changename = document.querySelector("#changename");
+const numberoftask = document.querySelector("#help").lastElementChild;
+allproject.forEach((project) => {
+  project.addEventListener("click", (e) => {
+    const name = e.target.children;
+    changename.textContent = name[1].textContent;
+    numberoftask.textContent=
+
+  });
+});
+
+const addtask = document.querySelector("button#add2");
+const containerform = document.querySelector("#containerform");
+const dark = document.querySelector(".overlay");
+addtask.addEventListener("click", () => {
+  containerform.style.display = "block";
+  dark.style.display = "block";
+});
+
+const taskname = document.querySelector("#taskname").value;
+const description = document.querySelector("#description").value;
+const date = document.querySelector("#dateform").value;
+const priority = document.querySelector("#priority").value;
+const note = document.querySelector("#note").value;
+const formtask = document.querySelector("#formtask");
+const canceltask = document.querySelector("button#add3");
