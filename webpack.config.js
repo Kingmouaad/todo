@@ -10,7 +10,10 @@ module.exports = {
     clean: true,
   },
   module: {
-    rules: [{ test: /\.css$/i, use: ["style-loader", "css-loader"] }],
+    rules: [
+      { test: /\.css$/i, use: ["style-loader", "css-loader"] },
+      { test: /\.svg$/, use: "svg-inline-loader" },
+    ],
   },
   plugins: [
     new HtmlWebpackPlugin({
