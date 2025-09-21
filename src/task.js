@@ -57,10 +57,26 @@ export class Task {
     const show = document.querySelector("div");
     show.textContent = "›";
     const deletee = document.querySelector("div");
+    deletee.setAttribute("style", "margin-left:auto;");
     deletee.textContent = "🗑️";
+    const fordate = document.createElement("div");
+    fordate.setAttribute(
+      "style",
+      "color:white;font-size:18px;display: flex;flex-direction: column "
+    );
+    const contbutton = document.createElement("div");
+    contbutton.setAttribute("style", "display: flex;flex-direction: row");
+    contbutton.appendChild(show);
+    contbutton.appendChild(deletee);
+    fordate.appendChild(contbutton);
+    const date = document.querySelector("div");
+    date.textContent = this.date;
+    date.setAttribute("style", "margin-top:auto;");
+    fordate.appendChild(date);
     layout.appendChild(checkbox);
     layout.appendChild(divcontent);
-    layout.appendChild(show);
-    layout.appendChild(deletee);
+    layout.appendChild(fordate);
+
+    return layout;
   };
 }

@@ -9,11 +9,11 @@ const projectmenu = document.querySelector("#seconddiv");
 const formproject = document.querySelector("#form");
 const formcontainer = document.querySelector("#thirddiv");
 
-const taskname = document.querySelector("#taskname").value;
-const description = document.querySelector("#description").value;
-const date = document.querySelector("#dateform").value;
-const priority = document.querySelector("#priority").value;
-const note = document.querySelector("#note").value;
+// const taskname = document.querySelector("#taskname").value;
+// const description = document.querySelector("#description").value;
+// const date = document.querySelector("#dateform").value;
+// const priority = document.querySelector("#priority").value;
+// const note = document.querySelector("#note").value;
 const formtask = document.querySelector("#formtask");
 const canceltask = document.querySelector("button#add3");
 const buttonaddtask = document.querySelector("button#add2");
@@ -84,6 +84,29 @@ allproject.forEach((project) => {
     addtask.addEventListener("click", () => {
       containerform.style.display = "block";
       dark.style.display = "block";
+      formtask.addEventListener("submit", (e) => {
+        e.preventDefault();
+        e.stopPropagation();
+        const taskName = document.querySelector("#taskname").value;
+        const taskDescription = document.querySelector("#description").value;
+        const taskDate = document.querySelector("#dateform").value;
+        const taskPriority = document.querySelector("#priority").value;
+        const taskNote = document.querySelector("#note").value;
+
+        const newTask = new Task(
+          taskName,
+          taskNote,
+          taskDate,
+          taskPriority,
+          taskDescription
+        );
+        const taskElement = newTask.createdom();
+        taskcontainer.appendChild(taskElement);
+
+        containerform.style.display = "none";
+        dark.style.display = "none";
+        formtask.reset();
+      });
     });
   });
 });
