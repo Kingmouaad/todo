@@ -15,6 +15,7 @@ const buttonaddtask = document.querySelector("button#add4");
 const addtask = document.querySelector("button#add2");
 const containerform = document.querySelector("#containerform");
 const dark = document.querySelector(".overlay");
+const searchInput = document.querySelector("#searchtask");
 
 // Global variable to track current project
 let currentProject = null;
@@ -44,6 +45,8 @@ const loadSavedProjects = () => {
     tpl.innerHTML = JSON.parse(html);
     const node = tpl.content.firstElementChild;
     if (node) {
+      // attach project id for later task lookups
+      node.dataset.projectId = key;
       projectmenu.appendChild(node);
       // Add event listener to the newly loaded project
       addProjectClickListener(node);
@@ -59,13 +62,39 @@ const addProjectClickListener = (projectElement) => {
       .querySelectorAll(".project")
       .forEach((p) => p.classList.remove("active"));
 
+    const taskcontainer = document.querySelector(".fourth");
+
     // Add active class to clicked project
     projectElement.classList.add("active");
+
+    // Clear current task list
+    while (taskcontainer.firstChild) {
+      taskcontainer.removeChild(taskcontainer.firstChild);
+    }
+
+    // Load tasks for this project from localStorage
+    const projectId = projectElement.dataset.projectId;
+    if (projectId) {
+      const stored = JSON.parse(
+        localStorage.getItem(`tasks:${projectId}`) || "[]"
+      );
+      stored.forEach((t) => {
+        const task = new Task(
+          t.taskname,
+          t.note,
+          t.date,
+          t.priority,
+          t.description
+        );
+        const el = task.createdom();
+        el.dataset.taskName = t.taskname || "";
+        taskcontainer.appendChild(el);
+      });
+    }
 
     const name = e.target.children;
     const changename = document.querySelector("#changename");
     const numberoftask = document.querySelector("#help").lastElementChild;
-    const taskcontainer = document.querySelector(".fourth");
 
     changename.textContent = name[1].textContent;
     numberoftask.textContent = taskcontainer.children.length;
@@ -96,6 +125,8 @@ addproject.addEventListener("click", (e) => {
   // Add event listener to new project
   addProjectClickListener(element);
 
+  // Persist a project id for task grouping
+  element.dataset.projectId = `${i}`;
   projectmenu.appendChild(element);
   localStorage.setItem(`${i}`, JSON.stringify(element.outerHTML));
   formcontainer.style.display = "none";
@@ -151,7 +182,23 @@ formtask.addEventListener("submit", (e) => {
 
   const taskcontainer = document.querySelector(".fourth");
   const taskElement = newTask.createdom();
+  taskElement.dataset.taskName = taskName;
   taskcontainer.appendChild(taskElement);
+
+  // Persist task under current project id
+  const projectIdForTask = currentProject?.dataset?.projectId;
+  if (projectIdForTask) {
+    const key = `tasks:${projectIdForTask}`;
+    const existing = JSON.parse(localStorage.getItem(key) || "[]");
+    existing.push({
+      taskname: taskName,
+      note: taskNote,
+      date: taskDate,
+      priority: taskPriority,
+      description: taskDescription,
+    });
+    localStorage.setItem(key, JSON.stringify(existing));
+  }
 
   // Update task count for current project
   const numberoftask = document.querySelector("#help").lastElementChild;
@@ -177,3 +224,6 @@ dark.addEventListener("click", () => {
   formcontainer.style.display = "none";
   formtask.reset();
 });
+
+const eventt = new Event("click");
+projectmenu.firstElementChild.dispatchEvent(eventt);

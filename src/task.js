@@ -113,14 +113,13 @@ export class Task {
     // Add delete functionality
     deleteButton.addEventListener("click", (e) => {
       e.stopPropagation();
-      if (confirm("Are you sure you want to delete this task?")) {
-        layout.remove();
-        // Update task count
-        const taskcontainer = document.querySelector(".fourth");
-        const numberoftask = document.querySelector("#help").lastElementChild;
-        if (numberoftask) {
-          numberoftask.textContent = taskcontainer.children.length;
-        }
+
+      layout.remove();
+      // Update task count
+      const taskcontainer = document.querySelector(".fourth");
+      const numberoftask = document.querySelector("#help").lastElementChild;
+      if (numberoftask) {
+        numberoftask.textContent = taskcontainer.children.length;
       }
     });
 

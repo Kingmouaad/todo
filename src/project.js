@@ -3,6 +3,7 @@ export class project {
     this.name = name;
     this.color = color;
   }
+  tasks = [];
   createdom = () => {
     const layout = document.createElement("div");
     const circle = document.createElement("div");
